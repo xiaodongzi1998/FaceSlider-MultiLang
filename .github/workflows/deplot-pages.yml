@@ -1,3 +1,4 @@
+# filepath: /C:/Users/Administrator/Desktop/FaceSlider-MultiLang/.github/workflows/deplot-pages.yml
 name: Deploy FaceSlider to GitHub Pages
 
 on:
@@ -24,3 +25,4 @@ jobs:
           branch: gh-pages
           folder: deployment
           clean: true
+          token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
