@@ -15,11 +15,12 @@ jobs:
 
       - name: Copy and rename FaceSlider.html
         run: |
-          cp FaceSlider.html index.html
+          mkdir deployment
+          cp FaceSlider.html deployment/index.html
 
       - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: .
+          folder: deployment
           clean: true
