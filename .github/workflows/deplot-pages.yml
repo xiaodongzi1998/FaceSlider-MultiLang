@@ -13,12 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy FaceSlider.html to gh-pages
+      - name: Copy FaceSlider.html to deployment folder
+        run: |
+          mkdir deployment
+          cp FaceSlider.html deployment/
+
+      - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: .
+          folder: deployment
           clean: true
-          target-folder: .
-          files: |
-            FaceSlider.html
