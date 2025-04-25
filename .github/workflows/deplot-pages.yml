@@ -1,5 +1,4 @@
-# filepath: /C:/Users/Administrator/Desktop/FaceSlider-MultiLang/.github/workflows/deplot-pages.yml
-name: Deploy FaceSlider to GitHub Pages
+name: Deploy to tiaozhan Pages
 
 on:
   push:
@@ -14,15 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Copy FaceSlider.html to deployment folder
+      - name: Copy and rename FaceSlider.html
         run: |
-          mkdir deployment
-          cp FaceSlider.html deployment/
+          cp FaceSlider.html index.html
 
       - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: deployment
+          folder: .
           clean: true
-          # token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
