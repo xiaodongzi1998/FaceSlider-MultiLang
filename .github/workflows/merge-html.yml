@@ -1,4 +1,4 @@
-name: Merge HTML, CSS, and JS into FaceSlider.html
+name: Merge HTML, CSS, and JS into index.html and deploy to gh-pages
 
 on:
   push:
@@ -15,28 +15,32 @@ jobs:
 
       - name: Merge HTML, CSS, and JS
         run: |
-          echo '<!DOCTYPE html>' > FaceSlider.html
-          echo '<html lang="en">' >> FaceSlider.html
-          echo '<head>' >> FaceSlider.html
-          echo '<meta charset="UTF-8">' >> FaceSlider.html
-          echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">' >> FaceSlider.html
-          echo '<title>滑动变脸器😀</title>' >> FaceSlider.html
-          echo '<style>' >> FaceSlider.html
-          cat html/style.css >> FaceSlider.html
-          echo '</style>' >> FaceSlider.html
-          echo '</head>' >> FaceSlider.html
-          echo '<body>' >> FaceSlider.html
-          cat html/index.html | sed '/<link.*style.css.*>/d' | sed '/<script.*script.js.*>/d' >> FaceSlider.html
-          echo '<script>' >> FaceSlider.html
-          cat html/script.js >> FaceSlider.html
-          echo '</script>' >> FaceSlider.html
-          echo '</body>' >> FaceSlider.html
-          echo '</html>' >> FaceSlider.html
+          echo '<!DOCTYPE html>' > index.html
+          echo '<html lang="en">' >> index.html
+          echo '<head>' >> index.html
+          echo '<meta charset="UTF-8">' >> index.html
+          echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">' >> index.html
+          echo '<title>滑动变脸器😀</title>' >> index.html
+          echo '<style>' >> index.html
+          cat html/style.css >> index.html
+          echo '</style>' >> index.html
+          echo '</head>' >> index.html
+          echo '<body>' >> index.html
+          cat html/index.html | sed '/<link.*style.css.*>/d' | sed '/<script.*script.js.*>/d' >> index.html
+          echo '<script>' >> index.html
+          cat html/script.js >> index.html
+          echo '</script>' >> index.html
+          echo '</body>' >> index.html
+          echo '</html>' >> index.html
 
-      - name: Commit and push merged file
+      - name: Commit and push to gh-pages
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add FaceSlider.html
-          git commit -m "Automated merge of HTML, CSS, and JS into FaceSlider.html"
-          git push
+          git fetch origin gh-pages
+          git checkout -b gh-pages origin/gh-pages || git checkout --orphan gh-pages
+          rm -rf *
+          mv index.html index.html
+          git add index.html
+          git commit -m "Automated merge of HTML, CSS, and JS into index.html"
+          git push origin gh-pages --force
