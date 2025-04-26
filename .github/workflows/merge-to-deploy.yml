@@ -1,0 +1,42 @@
+name: Merge HTML, CSS, and JS into deployment/index.html
+
+on:
+  push:
+    paths:
+      - 'html/**' # 仅当 html 文件夹下的文件发生更改时触发
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Merge HTML, CSS, and JS
+        run: |
+          mkdir deployment
+          echo '<!DOCTYPE html>' > deployment/index.html
+          echo '<html lang="en">' >> deployment/index.html
+          echo '<head>' >> deployment/index.html
+          echo '<meta charset="UTF-8">' >> deployment/index.html
+          echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">' >> deployment/index.html
+          echo '<title>滑动变脸器😀</title>' >> deployment/index.html
+          echo '<style>' >> deployment/index.html
+          cat html/style.css >> deployment/index.html
+          echo '</style>' >> deployment/index.html
+          echo '</head>' >> deployment/index.html
+          echo '<body>' >> deployment/index.html
+          cat html/index.html | sed '/<link.*style.css.*>/d' | sed '/<script.*script.js.*>/d' >> deployment/index.html
+          echo '<script>' >> deployment/index.html
+          cat html/script.js >> deployment/index.html
+          echo '</script>' >> deployment/index.html
+          echo '</body>' >> deployment/index.html
+          echo '</html>' >> deployment/index.html
+
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: deployment
+          clean: true
