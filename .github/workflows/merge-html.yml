@@ -1,0 +1,43 @@
+name: Merge HTML, CSS, and JS into FaceSlider.html
+
+on:
+  push:
+    paths:
+      - 'html/**' # 仅当 html 文件夹下的文件发生更改时触发
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Merge HTML, CSS, and JS
+        run: |
+          mkdir -p merged
+          echo '<!DOCTYPE html>' > merged/FaceSlider.html
+          echo '<html lang="en">' >> merged/FaceSlider.html
+          echo '<head>' >> merged/FaceSlider.html
+          echo '<meta charset="UTF-8">' >> merged/FaceSlider.html
+          echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">' >> merged/FaceSlider.html
+          echo '<title>滑动变脸器😀</title>' >> merged/FaceSlider.html
+          echo '<style>' >> merged/FaceSlider.html
+          cat html/style.css >> merged/FaceSlider.html
+          echo '</style>' >> merged/FaceSlider.html
+          echo '</head>' >> merged/FaceSlider.html
+          echo '<body>' >> merged/FaceSlider.html
+          cat html/index.html | sed '/<link.*style.css.*>/d' | sed '/<script.*script.js.*>/d' >> merged/FaceSlider.html
+          echo '<script>' >> merged/FaceSlider.html
+          cat html/script.js >> merged/FaceSlider.html
+          echo '</script>' >> merged/FaceSlider.html
+          echo '</body>' >> merged/FaceSlider.html
+          echo '</html>' >> merged/FaceSlider.html
+
+      - name: Commit and push merged file
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add merged/FaceSlider.html
+          git commit -m "Automated merge of HTML, CSS, and JS into FaceSlider.html"
+          git push

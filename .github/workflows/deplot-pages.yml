@@ -1,9 +1,11 @@
 name: Deploy to tiaozhan Pages
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows:
+      - Merge HTML, CSS, and JS into FaceSlider.html
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -16,7 +18,7 @@ jobs:
       - name: Copy and rename FaceSlider.html
         run: |
           mkdir deployment
-          cp FaceSlider.html deployment/index.html
+          cp merged/FaceSlider.html deployment/index.html
 
       - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
