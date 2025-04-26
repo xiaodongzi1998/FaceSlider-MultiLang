@@ -1,4 +1,4 @@
-name: Merge and Deploy to gh-pages
+name: Merge HTML, CSS, and JS into FaceSlider.html
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'html/**' # 仅当 html 文件夹下的文件发生更改时触发
 
 jobs:
-  merge-and-deploy:
+  merge:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,14 +33,10 @@ jobs:
           echo '</body>' >> FaceSlider.html
           echo '</html>' >> FaceSlider.html
 
-      - name: Deploy to gh-pages
+      - name: Commit and push merged file
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin gh-pages
-          git checkout -b gh-pages origin/gh-pages || git checkout --orphan gh-pages
-          rm -rf *
-          mv FaceSlider.html index.html
-          git add index.html
-          git commit -m "Automated merge and deploy to gh-pages"
-          git push origin gh-pages
+          git add FaceSlider.html
+          git commit -m "Automated merge of HTML, CSS, and JS into FaceSlider.html"
+          git push

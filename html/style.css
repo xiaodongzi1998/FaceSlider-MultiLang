@@ -147,7 +147,7 @@ body {
 .boi * {
     position: absolute;
 }
-/* 1 */
+
 .boi::before {
     content: '';
     display: block;
