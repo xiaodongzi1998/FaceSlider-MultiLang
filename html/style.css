@@ -26,26 +26,23 @@ body {
     font-family: 'Rubik', sans-serif;
 }
 
-.confirm,
-.accepted,
-.rejected {
+.confirm {
     display: flex;
     flex-direction: column;
     overflow: hidden;
     width: 72rem;
     max-width: 100%;
     min-width: 34rem;
+    height: 50rem;
     max-height: 100%;
-    height: 46rem;
+    min-height: 46rem;
     background-color: #ffffff;
     border-radius: 1rem;
     border: 1px solid #e0e0e0;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-.confirm-body,
-.accepted-body,
-.rejected-body {
+.confirm-body {
     flex: 1;
     display: flex;
     align-items: flex-end;
@@ -54,36 +51,26 @@ body {
     margin: 2rem 4rem;
 }
 
-.confirm-body-title,
-.accepted-body-title,
-.rejected-body-title {
+.confirm-body-title {
     margin: 0;
     padding: 0;
     position: absolute;
-    transform: translateY(-50%);
     top: 5%;
     text-align: center;
     width: 100%;
 }
 
-.confirm-body-subtitle,
-.accepted-body-subtitle,
-.rejected-body-subtitle {
+.confirm-body-subtitle {
     margin: 0;
     padding: 0;
     position: absolute;
-    transform: translateY(-50%);
     top: 15%;
     text-align: center;
     width: 100%;
     font-size: 1.5rem;
 }
 
-.confirm-body-button,
-.confirm-body-button:link,
-.confirm-body-button:visited,
-.accepted-body-button,
-.rejected-body-button {
+.confirm-body-button {
     color: #fff;
     border-radius: 1rem;
     text-decoration: none;
@@ -96,6 +83,7 @@ body {
 
 .confirm-body-button-delete {
     background-color: #a43;
+    border: none;
 }
 
 .confirm-body-button-delete:hover {
@@ -104,29 +92,15 @@ body {
 
 .confirm-body-button-cancel {
     background-color: #6a4;
+    border: none;
 }
 
 .confirm-body-button-cancel:hover {
     background-color: #81c061;
 }
 
-.accepted-body-button,
-.rejected-body-button {
-    background-color: #6a4;
-}
-
-.accepted-body-button:hover,
-.rejected-body-button:hover {
-    background-color: #81c061;
-}
 
 .boi {
-    /* 整体定位调一下 */
-    /* FIXME 好像没用 */
-    --happiness: 0.9;
-    --derp: 1;
-    --px: 0.5;
-    --py: 0.5;
     width: 22rem;
     max-width: 100%;
     height: 22rem;
@@ -221,7 +195,6 @@ body {
     transform: translateX(-50%);
     overflow: hidden;
     border: 3px solid #962d2d;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .boi-mouth::before {
@@ -246,8 +219,4 @@ body {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 20rem 20rem 0 0;
-}
-
-.hidden {
-    display: none;
 }

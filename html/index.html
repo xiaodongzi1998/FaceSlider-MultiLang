@@ -9,11 +9,10 @@
 </head>
 
 <body>
-  <!-- 初始界面 -->
   <section class="confirm">
     <div class="confirm-body">
-      <h1 class="confirm-body-title">可以成为我的恋人嘛～</h1>
-      <h2 class="confirm-body-subtitle">小树希望你成为ta的对象，是否接受？</h2>
+      <h1 class="confirm-body-title">你确定要卸载吗</h1>
+      <h2 class="confirm-body-subtitle">希望不要卸载</h2>
       <figure class="boi" style="--happiness:0.9; --derp:1; --px:0.5; --py:0.5;">
         <div class="boi-blush boi-blush-left"></div>
         <div class="boi-blush boi-blush-right"></div>
@@ -21,40 +20,8 @@
         <div class="boi-eye boi-eye-right"></div>
         <div class="boi-mouth"></div>
       </figure>
-      <a class="confirm-body-button confirm-body-button-cancel" href="javascript:void(0)">接受</a>
-      <a class="confirm-body-button confirm-body-button-delete" href="javascript:void(0)">拒绝</a>
-    </div>
-  </section>
-
-  <!-- 接受后的新界面 -->
-  <section class="accepted hidden">
-    <div class="accepted-body">
-      <h1 class="accepted-body-title">!!!喜欢你!!</h1>
-      <h2 class="accepted-body-subtitle">小树非常开心，祝你们幸福快乐！</h2>
-      <figure class="boi" style="--happiness:1; --derp:0; --px:0.5; --py:0.5;">
-        <div class="boi-blush boi-blush-left"></div>
-        <div class="boi-blush boi-blush-right"></div>
-        <div class="boi-eye boi-eye-left"></div>
-        <div class="boi-eye boi-eye-right"></div>
-        <div class="boi-mouth"></div>
-      </figure>
-      <a class="accepted-body-button" href="javascript:void(0)">返回</a>
-    </div>
-  </section>
-
-  <!-- 拒绝后的新界面 -->
-  <section class="rejected hidden">
-    <div class="rejected-body">
-      <h1 class="rejected-body-title">很难过...</h1>
-      <h2 class="rejected-body-subtitle">但尊重你的决定，祝你一切顺利！</h2>
-      <figure class="boi" style="--happiness:0.2; --derp:0; --px:0.5; --py:0.5;">
-        <div class="boi-blush boi-blush-left"></div>
-        <div class="boi-blush boi-blush-right"></div>
-        <div class="boi-eye boi-eye-left"></div>
-        <div class="boi-eye boi-eye-right"></div>
-        <div class="boi-mouth"></div>
-      </figure>
-      <a class="rejected-body-button" href="javascript:void(0)">返回</a>
+      <button class="confirm-body-button confirm-body-button-cancel">取消</button>
+      <button class="confirm-body-button confirm-body-button-delete">卸载</button>
     </div>
   </section>
   <script src="script.js"></script>
