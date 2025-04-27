@@ -1,45 +1,32 @@
-/* 全局变量定义 */
-:root {
-    --main-text-color: #333;
-    --happy-color: #6a4;
-    --happy-hover-color: #81c061;
-    --unhappy-color: #a43;
-    --unhappy-hover-color: #c85a48;
-    --face-border-color: #ecb23e;
-    --face-background-start: #f7e0b2;
-    --face-background-end: #eb5;
-    --mouth-color: #a33;
-    --mouth-border-color: #962d2d;
-}
-
 * {
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
+    font: inherit;
 }
 
 html {
-    font-size: 64.5%;
+    color: #333;
+    font-size: 62.5%;
+}
+
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 50%;
+    }
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
     width: 100vw;
     height: 100vh;
+    font-family: 'Rubik', sans-serif;
 }
 
-/* 响应式设计 */
-@media screen and (max-width: 480px) {
-    html {
-        font-size: 50%;
-        /* 1rem = 8px 在小屏幕上 */
-    }
-}
-
-/* 主容器样式 */
 .container {
-    font-size: 2rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -55,14 +42,6 @@ body {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-.container * {
-    box-sizing: border-box;
-    font: inherit;
-    color: var(--main-text-color);
-    font-family: 'Rubik', sans-serif;
-}
-
-/* 内容区域样式 */
 .content {
     flex: 1;
     display: flex;
@@ -72,7 +51,6 @@ body {
     margin: 2rem 4rem;
 }
 
-/* 标题样式 */
 .title {
     margin: 0;
     padding: 0;
@@ -92,7 +70,6 @@ body {
     font-size: 1.5rem;
 }
 
-/* 按钮样式 */
 .button {
     color: #fff;
     border-radius: 1rem;
@@ -102,63 +79,52 @@ body {
     min-width: 10rem;
     text-align: center;
     transition: background-color 0.3s, transform 0.3s;
-    border: none;
 }
 
 .button-happy {
-    background-color: var(--happy-color);
+    background-color: #6a4;
+    border: none;
 }
 
 .button-happy:hover {
-    background-color: var(--happy-hover-color);
+    background-color: #81c061;
 }
 
 .button-unhappy {
-    background-color: var(--unhappy-color);
+    background-color: #a43;
+    border: none;
 }
 
 .button-unhappy:hover {
-    background-color: var(--unhappy-hover-color);
+    background-color: #c85a48;
 }
 
-/* 表情滑块样式 */
 .face-slider {
     --happiness: 0.9;
-    /* 表情表达的幸福程度 */
     --derp: 1;
-    /* 眼睛歪斜程度 */
     --px: 0.5;
-    /* 水平位置调整 */
     --py: 0.5;
-    /* 垂直位置调整 */
-
-    /* 基础大小和位置 */
     width: 22rem;
     max-width: 100%;
     height: 22rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /* 外观 */
-    background-image: radial-gradient(var(--face-background-start), var(--face-background-end));
+    background-image: radial-gradient(#f7e0b2, #eb5);
     border-radius: 100%;
     overflow: hidden;
     margin: 0;
     align-self: center;
     flex: 0 0 auto;
-    border: solid 2px var(--face-border-color);
+    border: solid 2px #ecb23e;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-
-    /* 定位设置 */
-    position: absolute;
 }
 
+.face-slider,
 .face-slider * {
     position: absolute;
 }
 
-/* 表情情绪滤镜 */
 .face-slider::before {
     content: '';
     display: block;
@@ -170,7 +136,6 @@ body {
     opacity: calc(1 - var(--happiness));
 }
 
-/* 腮红样式 */
 .face-slider-blush {
     width: 20%;
     height: 10%;
@@ -189,7 +154,6 @@ body {
     right: calc(9% - var(--px) * 2%);
 }
 
-/* 眼睛样式 */
 .face-slider-eye {
     width: calc(26% - var(--happiness) * 2%);
     height: calc(26% - var(--happiness) * 2%);
@@ -203,11 +167,18 @@ body {
     left: calc(18% + var(--px) * 4%);
 }
 
+.face-slider-eye-left::after {
+    transform: translate(calc((var(--px) + var(--derp) * 0.5) * 100%), calc((var(--py) + var(--derp) * 0.5) * 100%));
+}
+
 .face-slider-eye-right {
     right: calc(22% - var(--px) * 4%);
 }
 
-/* 眼球样式 */
+.face-slider-eye-right::after {
+    transform: translate(calc((var(--px) + var(--derp) * -0.3) * 100%), calc((var(--py) + var(--derp) * -0.3) * 100%));
+}
+
 .face-slider-eye::after {
     content: '';
     display: block;
@@ -217,28 +188,18 @@ body {
     border-radius: 100%;
 }
 
-.face-slider-eye-left::after {
-    transform: translate(calc((var(--px) + var(--derp) * 0.5) * 100%), calc((var(--py) + var(--derp) * 0.5) * 100%));
-}
-
-.face-slider-eye-right::after {
-    transform: translate(calc((var(--px) + var(--derp) * -0.3) * 100%), calc((var(--py) + var(--derp) * -0.3) * 100%));
-}
-
-/* 嘴巴样式 */
 .face-slider-mouth {
     width: calc(51% - var(--happiness) * 2%);
     height: calc(26% - var(--happiness) * 2%);
-    background-color: var(--mouth-color);
+    background-color: #a33;
     border-radius: calc((1 - var(--happiness)) * 10em) calc((1 - var(--happiness)) * 10em) calc(var(--happiness) * 16em) calc(var(--happiness) * 16em);
     top: calc(57.5% + var(--py) * 5%);
     left: calc(47.5% + var(--px) * 5%);
     transform: translateX(-50%);
     overflow: hidden;
-    border: 3px solid var(--mouth-border-color);
+    border: 3px solid #962d2d;
 }
 
-/* 牙齿 */
 .face-slider-mouth::before {
     content: '';
     display: block;
@@ -251,7 +212,6 @@ body {
     border-radius: 0 0 0.5rem 0.5rem;
 }
 
-/* 舌头 */
 .face-slider-mouth::after {
     content: '';
     display: block;
