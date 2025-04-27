@@ -26,7 +26,7 @@ body {
     font-family: 'Rubik', sans-serif;
 }
 
-.confirm {
+.container {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -42,7 +42,7 @@ body {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-.confirm-body {
+.content {
     flex: 1;
     display: flex;
     align-items: flex-end;
@@ -51,7 +51,7 @@ body {
     margin: 2rem 4rem;
 }
 
-.confirm-body-title {
+.title {
     margin: 0;
     padding: 0;
     position: absolute;
@@ -60,7 +60,7 @@ body {
     width: 100%;
 }
 
-.confirm-body-subtitle {
+.subtitle {
     margin: 0;
     padding: 0;
     position: absolute;
@@ -70,7 +70,7 @@ body {
     font-size: 1.5rem;
 }
 
-.confirm-body-button {
+.button {
     color: #fff;
     border-radius: 1rem;
     text-decoration: none;
@@ -81,26 +81,29 @@ body {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.confirm-body-button-delete {
+.button-yes {
     background-color: #a43;
     border: none;
 }
 
-.confirm-body-button-delete:hover {
+.button-yes:hover {
     background-color: #c85a48;
 }
 
-.confirm-body-button-cancel {
+.button-no {
     background-color: #6a4;
     border: none;
 }
 
-.confirm-body-button-cancel:hover {
+.button-no:hover {
     background-color: #81c061;
 }
 
-
-.boi {
+.face-slider {
+    --happiness: 0.9;
+    --derp: 1;
+    --px: 0.5;
+    --py: 0.5;
     width: 22rem;
     max-width: 100%;
     height: 22rem;
@@ -117,12 +120,12 @@ body {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
-.boi,
-.boi * {
+.face-slider,
+.face-slider * {
     position: absolute;
 }
 
-.boi::before {
+.face-slider::before {
     content: '';
     display: block;
     width: 100%;
@@ -133,7 +136,7 @@ body {
     opacity: calc(1 - var(--happiness));
 }
 
-.boi-blush {
+.face-slider-blush {
     width: 20%;
     height: 10%;
     background-color: rgba(255, 100, 100, 0.3);
@@ -143,15 +146,15 @@ body {
     opacity: calc(var(--happiness) * var(--happiness) * 0.9 + 0.1);
 }
 
-.boi-blush-left {
+.face-slider-blush-left {
     left: calc(7% + var(--px) * 2%);
 }
 
-.boi-blush-right {
+.face-slider-blush-right {
     right: calc(9% - var(--px) * 2%);
 }
 
-.boi-eye {
+.face-slider-eye {
     width: calc(26% - var(--happiness) * 2%);
     height: calc(26% - var(--happiness) * 2%);
     background-color: #f6f6f6;
@@ -160,23 +163,23 @@ body {
     overflow: hidden;
 }
 
-.boi-eye-left {
+.face-slider-eye-left {
     left: calc(18% + var(--px) * 4%);
 }
 
-.boi-eye-left::after {
+.face-slider-eye-left::after {
     transform: translate(calc((var(--px) + var(--derp) * 0.5) * 100%), calc((var(--py) + var(--derp) * 0.5) * 100%));
 }
 
-.boi-eye-right {
+.face-slider-eye-right {
     right: calc(22% - var(--px) * 4%);
 }
 
-.boi-eye-right::after {
+.face-slider-eye-right::after {
     transform: translate(calc((var(--px) + var(--derp) * -0.3) * 100%), calc((var(--py) + var(--derp) * -0.3) * 100%));
 }
 
-.boi-eye::after {
+.face-slider-eye::after {
     content: '';
     display: block;
     background-color: #421;
@@ -185,7 +188,7 @@ body {
     border-radius: 100%;
 }
 
-.boi-mouth {
+.face-slider-mouth {
     width: calc(51% - var(--happiness) * 2%);
     height: calc(26% - var(--happiness) * 2%);
     background-color: #a33;
@@ -197,7 +200,7 @@ body {
     border: 3px solid #962d2d;
 }
 
-.boi-mouth::before {
+.face-slider-mouth::before {
     content: '';
     display: block;
     position: absolute;
@@ -209,7 +212,7 @@ body {
     border-radius: 0 0 0.5rem 0.5rem;
 }
 
-.boi-mouth::after {
+.face-slider-mouth::after {
     content: '';
     display: block;
     position: absolute;

@@ -1,9 +1,9 @@
-const confirmSection = document.querySelector('.confirm')
-const boi = document.querySelector('.boi')
-const btnDelete = document.querySelector('.confirm-body-button-delete')
-const btnCancel = document.querySelector('.confirm-body-button-cancel')
-const title = document.querySelector('.confirm-body-title')
-const subtitle = document.querySelector('.confirm-body-subtitle')
+const container = document.querySelector('.container')
+const faceSlider = document.querySelector('.face-slider')
+const btnYes = document.querySelector('.button-yes')
+const btnNo = document.querySelector('.button-no')
+const title = document.querySelector('.title')
+const subtitle = document.querySelector('.subtitle')
 const current = {
     happiness: 0.9,
     derp: 1,
@@ -27,84 +27,91 @@ let rejectCount = 0
 const maxrejectCount = 2
 let isAnimating = true
 
-confirmSection.addEventListener('mousemove', ({ clientX: x, clientY: y }) => {
-    let dx1 = x - btnDelete.getBoundingClientRect().x - btnDelete.getBoundingClientRect().width * 0.5
-    let dy1 = y - btnDelete.getBoundingClientRect().y - btnDelete.getBoundingClientRect().height * 0.5
-    let dx2 = x - btnCancel.getBoundingClientRect().x - btnCancel.getBoundingClientRect().width * 0.5
-    let dy2 = y - btnCancel.getBoundingClientRect().y - btnCancel.getBoundingClientRect().height * 0.5
-    let px = (x - confirmSection.getBoundingClientRect().x) / confirmSection.getBoundingClientRect().width
-    let py = (y - confirmSection.getBoundingClientRect().y) / confirmSection.getBoundingClientRect().height
-    let distDelete = Math.sqrt(dx1 * dx1 + dy1 * dy1)
-    let distCancel = Math.sqrt(dx2 * dx2 + dy2 * dy2)
-    let happiness = Math.pow(distDelete / (distCancel + distDelete), 0.75)
+container.addEventListener('mousemove', ({ clientX: x, clientY: y }) => {
+    const yesRect = btnYes.getBoundingClientRect()
+    const noRect = btnNo.getBoundingClientRect()
+    const containerRect = container.getBoundingClientRect()
+
+    const dx1 = x - (yesRect.x + yesRect.width * 0.5)
+    const dy1 = y - (yesRect.y + yesRect.height * 0.5)
+    const dx2 = x - (noRect.x + noRect.width * 0.5)
+    const dy2 = y - (noRect.y + noRect.height * 0.5)
+
+    const px = (x - containerRect.x) / containerRect.width
+    const py = (y - containerRect.y) / containerRect.height
+
+    const distYes = Math.sqrt(dx1 * dx1 + dy1 * dy1)
+    const distNo = Math.sqrt(dx2 * dx2 + dy2 * dy2)
+    const happiness = Math.pow(distYes / (distNo + distYes), 0.75)
+
     target.happiness = happiness
     target.derp = 0
     target.px = px
     target.py = py
 })
 
-confirmSection.addEventListener('mouseleave', () => {
+container.addEventListener('mouseleave', () => {
     target.happiness = 0.9
     target.derp = 1
     target.px = 0.5
     target.py = 0.5
 })
 
-btnCancel.addEventListener('click', () => {
+btnNo.addEventListener('click', () => {
     if (isAnimating) {
         Object.assign(current, acceptedtarget)
-        btnCancel.innerHTML = '返回'
+        btnNo.innerHTML = '返回'
         title.innerHTML = '已取消'
         subtitle.innerHTML = '感谢您继续使用本插件'
-        btnDelete.style.visibility = 'hidden'
+        btnYes.style.visibility = 'hidden'
         isAnimating = false
     } else {
-        btnCancel.innerHTML = '取消'
+        btnNo.innerHTML = '取消'
         title.innerHTML = '你确定要卸载吗'
         subtitle.innerHTML = '希望不要卸载'
         isAnimating = true
-        btnDelete.style.visibility = 'visible'
-        btnDelete.style.position = 'static'
-        btnDelete.style.left = ''
-        btnDelete.style.top = ''
-        updateBoi()
+        btnYes.style.visibility = 'visible'
+        btnYes.style.position = 'static'
+        btnYes.style.left = ''
+        btnYes.style.top = ''
+        updateFace()
     }
 })
 
-btnDelete.addEventListener('click', () => {
+btnYes.addEventListener('click', () => {
     if (isAnimating) {
         rejectCount++
         if (rejectCount >= maxrejectCount) {
             Object.assign(current, rejectedtarget)
-            btnDelete.innerHTML = '返回'
+            btnYes.innerHTML = '返回'
             title.innerHTML = '已删除'
             subtitle.innerHTML = '感谢您使用本插件'
-            btnCancel.style.visibility = 'hidden'
-            btnDelete.style.position = 'static'
-            btnDelete.style.left = ''
-            btnDelete.style.top = ''
+            btnNo.style.visibility = 'hidden'
+            btnYes.style.position = 'static'
+            btnYes.style.left = ''
+            btnYes.style.top = ''
             isAnimating = false
         } else {
-            btnDelete.style.position = 'absolute'
-            btnDelete.style.left = `${Math.random() * 80}%`
-            btnDelete.style.top = `${Math.random() * 80}%`
+            btnYes.style.position = 'absolute'
+            btnYes.style.left = `${Math.random() * 80}%`
+            btnYes.style.top = `${Math.random() * 80}%`
             target.happiness = Math.max(0.1, target.happiness - 0.1)
-            btnCancel.style.transform = `scale(${1 + rejectCount * 0.1})`
+            btnNo.style.transform = `scale(${1 + rejectCount * 0.1})`
         }
     } else {
-        btnDelete.innerHTML = '卸载'
+        btnYes.innerHTML = '卸载'
         title.innerHTML = '你确定要卸载吗'
         subtitle.innerHTML = '希望不要卸载'
-        btnCancel.style.visibility = 'visible'
-        btnDelete.style.position = 'static'
-        btnDelete.style.left = ''
-        btnDelete.style.top = ''
+        btnNo.style.visibility = 'visible'
+        btnYes.style.position = 'static'
+        btnYes.style.left = ''
+        btnYes.style.top = ''
         isAnimating = true
-        updateBoi()
+        updateFace()
     }
 })
 
-function updateBoi() {
+function updateFace() {
     for (let prop in target) {
         if (target[prop] === current[prop]) {
             continue
@@ -113,10 +120,10 @@ function updateBoi() {
         } else {
             current[prop] += (target[prop] - current[prop]) * 0.1
         }
-        boi.style.setProperty(`--${prop}`, current[prop])
+        faceSlider.style.setProperty(`--${prop}`, current[prop])
     }
     if (!isAnimating) return
-    requestAnimationFrame(updateBoi)
+    requestAnimationFrame(updateFace)
 }
 
-updateBoi()
+updateFace()
