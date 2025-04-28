@@ -2,9 +2,9 @@
 
 用各种语言实现滑动变阻器的功能。
 
-<img src="docs/FaceSlider.png" alt="FaceSlider" width="300" />
-
----
+<div align="center">
+  <img src="docs/FaceSlider.png" alt="FaceSlider" width="300" />
+</div>
 
 ## 🚀 快速开始
 
