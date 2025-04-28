@@ -1,6 +1,25 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
+interface FaceState {
+  happiness: number
+  derp: number
+  px: number
+  py: number
+}
+
+interface UIState {
+  btnHappyText?: string
+  btnUnhappyText?: string
+  titleText?: string
+  subtitleText?: string
+}
+
+interface ConfigState {
+  face: FaceState
+  ui: UIState
+}
+
 onMounted(() => {
   const container = document.querySelector('.container') as HTMLElement
   const face = document.querySelector('.face-slider') as HTMLElement
