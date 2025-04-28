@@ -2,7 +2,7 @@
 
 用各种语言实现滑动变阻器的功能。
 
-<img src="docs/FaceSlider.png" alt="FaceSlider" style="zoom:20%;" />
+<img src="docs/FaceSlider.png" alt="FaceSlider" width="300" />
 
 ---
 
